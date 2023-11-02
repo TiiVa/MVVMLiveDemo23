@@ -1,10 +1,12 @@
-﻿namespace MVVMLiveDemo23.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace MVVMLiveDemo23.ViewModels;
 
 public class MainViewModel
 {
-    public ViewModelBase CurrentViewModel { get; }
+    public ObservableObject CurrentViewModel { get; }
 
-    public MainViewModel(ViewModelBase currentViewModel)
+    public MainViewModel(ObservableObject currentViewModel)
     {
         CurrentViewModel = currentViewModel;
     }
