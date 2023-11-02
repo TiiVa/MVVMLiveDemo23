@@ -8,9 +8,16 @@
     xmlns:views="clr-namespace:MVVMLiveDemo23.Views"
     Title="MainWindow"
     Width="800"
-    Height="450"
+    Height="800"
     mc:Ignorable="d">
     <Grid>
-        <views:DemoView DataContext="{Binding CurrentViewModel}" />
+        <TabControl>
+            <TabItem Header="Demo">
+                <views:DemoView DataContext="{Binding DemoViewModel}" />
+            </TabItem>
+            <TabItem Header="People">
+                <views:PeopleView Grid.Row="1" DataContext="{Binding PeopleViewModel}" />
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

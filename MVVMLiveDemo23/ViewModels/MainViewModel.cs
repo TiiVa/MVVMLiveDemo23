@@ -4,10 +4,12 @@ namespace MVVMLiveDemo23.ViewModels;
 
 public class MainViewModel
 {
-    public ObservableObject CurrentViewModel { get; }
+    public ObservableObject DemoViewModel { get; }
+    public ObservableObject PeopleViewModel { get; }
 
-    public MainViewModel(ObservableObject currentViewModel)
+    public MainViewModel(ObservableObject demoViewModel, ObservableObject peopleViewModel)
     {
-        CurrentViewModel = currentViewModel;
+        DemoViewModel = demoViewModel;
+        PeopleViewModel = peopleViewModel;
     }
 }
