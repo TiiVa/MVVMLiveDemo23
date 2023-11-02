@@ -41,6 +41,7 @@ public class PeopleViewModel : ObservableObject
             }
 
             UpdateSelectedPersonCommand.NotifyCanExecuteChanged();
+            RemoveSelectedPersonCommand.NotifyCanExecuteChanged();
             OnPropertyChanged();
         }
     }
@@ -54,6 +55,7 @@ public class PeopleViewModel : ObservableObject
         {
             _editFirstName = value;
             OnPropertyChanged();
+            AddNewPersonCommand.NotifyCanExecuteChanged();
         }
     }
 
@@ -66,6 +68,7 @@ public class PeopleViewModel : ObservableObject
         {
             _editLastName = value;
             OnPropertyChanged();
+            AddNewPersonCommand.NotifyCanExecuteChanged();
         }
     }
 
@@ -74,6 +77,8 @@ public class PeopleViewModel : ObservableObject
     #region Commands
 
     public IRelayCommand UpdateSelectedPersonCommand { get; }
+    public IRelayCommand RemoveSelectedPersonCommand { get; }
+    public IRelayCommand AddNewPersonCommand { get; }
 
     #endregion
 
@@ -83,6 +88,31 @@ public class PeopleViewModel : ObservableObject
         PeopleList.Add(new PersonModel() { FirstName = "Angela", LastName = "Lindqvist" });
 
         UpdateSelectedPersonCommand = new RelayCommand(UpdateSelectedPersonCommandExecute, UpdateSelectedPersonCommandCanExecute);
+        RemoveSelectedPersonCommand = new RelayCommand(RemoveSelectedPersonCommandExecute, RemoveSelectedPersonCanExecute);
+        AddNewPersonCommand = new RelayCommand(AddNewPersonCommandExecute, AddNewPersonCommandCanExecute);
+    }
+
+    private bool AddNewPersonCommandCanExecute()
+    {
+        return !string.IsNullOrEmpty(EditFirstName) && !string.IsNullOrEmpty(EditLastName);
+    }
+
+    private void AddNewPersonCommandExecute()
+    {
+        var newPerson = new PersonModel();
+        newPerson.FirstName = EditFirstName;
+        newPerson.LastName = EditLastName;
+        PeopleList.Add(newPerson);
+    }
+
+    private bool RemoveSelectedPersonCanExecute()
+    {
+        return _selectedPerson is not null;
+    }
+
+    private void RemoveSelectedPersonCommandExecute()
+    {
+        PeopleList.Remove(_selectedPerson);
     }
 
     private bool UpdateSelectedPersonCommandCanExecute()

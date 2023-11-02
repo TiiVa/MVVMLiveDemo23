@@ -50,8 +50,14 @@
                 Grid.Row="2"
                 Command="{Binding UpdateSelectedPersonCommand}"
                 Content="Update" />
-            <Button Grid.Row="3" Content="Add" />
-            <Button Grid.Row="4" Content="Remove" />
+            <Button
+                Grid.Row="3"
+                Command="{Binding AddNewPersonCommand}"
+                Content="Add" />
+            <Button
+                Grid.Row="4"
+                Command="{Binding RemoveSelectedPersonCommand}"
+                Content="Remove" />
         </Grid>
     </Grid>
 </UserControl>
