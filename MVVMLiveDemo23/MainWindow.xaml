@@ -5,19 +5,33 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MVVMLiveDemo23"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:MVVMLiveDemo23.ViewModels"
     xmlns:views="clr-namespace:MVVMLiveDemo23.Views"
     Title="MainWindow"
     Width="800"
     Height="800"
+    d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+    FontSize="32"
     mc:Ignorable="d">
     <Grid>
-        <TabControl>
-            <TabItem Header="Demo">
-                <views:DemoView DataContext="{Binding DemoViewModel}" />
-            </TabItem>
-            <TabItem Header="People">
-                <views:PeopleView Grid.Row="1" DataContext="{Binding PeopleViewModel}" />
-            </TabItem>
-        </TabControl>
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type viewModels:DemoViewModel}">
+                <views:DemoView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:PeopleViewModel}">
+                <views:PeopleView />
+            </DataTemplate>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="110" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical">
+            <Button Command="{Binding NavigateDemoCommand}" Content="Demo" />
+            <Button Command="{Binding NavigatePeopleCommand}" Content="People" />
+        </StackPanel>
+
+        <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}" />
     </Grid>
 </Window>

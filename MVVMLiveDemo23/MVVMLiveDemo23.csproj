@@ -11,4 +11,9 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Enums\" />
+    <Folder Include="ViewModels\Locator\" />
+  </ItemGroup>
+
 </Project>

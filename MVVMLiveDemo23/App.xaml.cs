@@ -5,7 +5,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Navigation;
 using MVVMLiveDemo23.Models;
+using MVVMLiveDemo23.Services;
 using MVVMLiveDemo23.ViewModels;
 
 namespace MVVMLiveDemo23
@@ -15,14 +17,18 @@ namespace MVVMLiveDemo23
     /// </summary>
     public partial class App : Application
     {
+        private readonly DemoNavigationService _demoNavigationService;
+
+        public App()
+        {
+            _demoNavigationService = new DemoNavigationService();
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            var demoModel = new DemoModel();
-            var demoViewModel = new DemoViewModel(demoModel);
-            var peopleViewModel = new PeopleViewModel();
-            var mainViewModel = new MainViewModel(demoViewModel, peopleViewModel);
+            var mainViewModel = new MainViewModel(_demoNavigationService);
 
             var mainWindow = new MainWindow(){ DataContext = mainViewModel};
 
